@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 
 export const Container = styled.div`
 	height: 60vh;
@@ -12,11 +13,15 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
 	font-size: 70px;
+
+	${mobile({ fontSize: "40px" })}
 `;
 
 export const Description = styled.p`
 	font-size: 24px;
 	font-weight: 300;
+
+	${mobile({ fontSize: "14px" })}
 `;
 export const InputContainer = styled.div`
 	width: 50%;

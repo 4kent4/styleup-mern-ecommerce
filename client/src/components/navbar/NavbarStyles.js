@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { mobile, tablet } from "../../responsive";
 
 export const Container = styled.div`
 	height: 60px;
+	${tablet({ height: "50px" })}
 `;
 
 export const Wrapper = styled.div`
@@ -10,11 +12,14 @@ export const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 100%;
+	${tablet({ padding: "10px 10px" })}
 `;
 
 export const Language = styled.span`
 	font-size: 14px;
 	cursor: pointer;
+	${tablet({ display: "none" })}
 `;
 
 export const Left = styled.div`
@@ -33,6 +38,8 @@ export const StyledLink = styled(Link)`
 	&:hover {
 		transform: scale(1.01);
 	}
+
+	${tablet({ fontSize: "16px" })}
 `;
 
 export const Center = styled.div`
@@ -48,12 +55,15 @@ export const SearchContainer = styled.div`
 	align-items: center;
 	margin-left: 25px;
 	padding: 5px;
-	border-radius: 10px;
+	border-radius: 5px;
+
+	${tablet({ marginLeft: "0px" })}
 `;
 
 export const Input = styled.input`
 	border: none;
 	outline: none;
+	${mobile({ width: "50px" })}
 `;
 
 export const Right = styled.div`
@@ -68,4 +78,15 @@ export const MenuItem = styled(Link)`
 	font-size: 14px;
 	cursor: pointer;
 	color: black;
+
+	${tablet({ display: "none" })}
+`;
+
+export const HamburgerMenuBar = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+
+	${tablet({ display: "flex" })}
 `;

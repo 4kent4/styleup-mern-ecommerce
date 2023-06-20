@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { tablet } from "../../responsive";
 
 export const Container = styled.div`
 	display: flex;
 	background-color: black;
 	color: white;
+
+	${tablet({ flexDirection: "column" })}
 `;
 
 export const Left = styled.div`
@@ -14,7 +18,14 @@ export const Left = styled.div`
 	gap: 20px;
 `;
 
-export const Logo = styled.h1``;
+export const LogoContainer = styled.div``;
+
+export const StyledLink = styled(Link)`
+	font-weight: bold;
+	font-size: 24px;
+	color: white;
+	font-family: "Tilt Prism", cursive;
+`;
 
 export const Description = styled.p``;
 

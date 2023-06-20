@@ -8,11 +8,18 @@ import {
 	SearchContainer,
 	Input,
 	Right,
-	MenuItem,
+	// MenuItem,
+	HamburgerMenuBar,
 } from "./NavbarStyles";
 import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import Badge from "@mui/material/Badge";
+
+import MenuItem from "./menu/Menu";
+
+// import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+
+// import Badge from "@mui/material/Badge";
+
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
 	return (
@@ -24,18 +31,23 @@ const Navbar = () => {
 				<Center>
 					<Language>EN</Language>
 					<SearchContainer>
-						<Input />
+						<Input placeholder="search" />
 						<SearchIcon style={{ fontSize: 16, color: "grey" }} />
 					</SearchContainer>
 				</Center>
 				<Right>
-					<MenuItem to="/register">Register</MenuItem>
+					{/* Menu Items */}
+					{/* <MenuItem to="/register">Register</MenuItem>
 					<MenuItem to="/login">Sign In</MenuItem>
 					<MenuItem>
 						<Badge badgeContent={4} color="primary">
 							<ShoppingCartOutlinedIcon />
 						</Badge>
-					</MenuItem>
+					</MenuItem> */}
+					<MenuItem />
+					<HamburgerMenuBar>
+						<MenuIcon />
+					</HamburgerMenuBar>
 				</Right>
 			</Wrapper>
 		</Container>

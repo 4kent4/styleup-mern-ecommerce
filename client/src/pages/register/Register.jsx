@@ -7,6 +7,7 @@ import {
 	Form,
 	Input,
 	InputContainer,
+	ButtonContainer,
 	Button,
 	Signin,
 } from "./RegisterStyles";
@@ -46,8 +47,9 @@ const Register = () => {
 						<Label>Confirm Password:</Label>
 						<Input placeholder="confirm password" />
 					</InputContainer>
-
-					<Button>Register</Button>
+					<ButtonContainer>
+						<Button>Register</Button>
+					</ButtonContainer>
 				</Form>
 				<Signin>
 					Already have an account? <Link to="/login">Sign In</Link>

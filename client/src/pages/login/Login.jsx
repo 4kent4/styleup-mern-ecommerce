@@ -7,6 +7,7 @@ import {
 	Form,
 	Input,
 	InputContainer,
+	ButtonContainer,
 	Button,
 	Signup,
 } from "./LoginStyles";
@@ -26,8 +27,9 @@ const Login = () => {
 						<Label>Password:</Label>
 						<Input placeholder="password" />
 					</InputContainer>
-
-					<Button>Login</Button>
+					<ButtonContainer>
+						<Button>Login</Button>
+					</ButtonContainer>
 				</Form>
 				<Signup>
 					Don't have an account yet? <Link to="/register">Sign Up</Link>

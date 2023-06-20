@@ -1,7 +1,8 @@
 import {
 	Container,
 	Left,
-	Logo,
+	LogoContainer,
+	StyledLink,
 	Description,
 	SocialContainer,
 	SocialIcon,
@@ -27,7 +28,9 @@ const Footer = () => {
 	return (
 		<Container>
 			<Left>
-				<Logo>BIG PP</Logo>
+				<LogoContainer>
+					<StyledLink to="/">STYLE UP</StyledLink>
+				</LogoContainer>
 				<Description>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ea
 					voluptas aspernatur possimus eum consequuntur necessitatibus ratione!

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile, mobileSE, tablet } from "../../responsive";
 
 export const Container = styled.div`
 	display: flex;
@@ -13,6 +14,10 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
 	padding: 20px;
 	width: 40%;
+
+	${tablet({ width: "50%" })}
+	${mobile({ width: "90%" })}
+	${mobileSE({ width: "100%" })}
 `;
 
 export const Title = styled.h2`
@@ -26,6 +31,8 @@ export const Form = styled.form`
 	display: flex;
 	gap: 8%;
 	flex-wrap: wrap;
+
+	${tablet({ flexDirection: "column", gap: "30px" })}
 `;
 
 export const InputContainer = styled.div`
@@ -42,6 +49,8 @@ export const Input = styled.input`
 	border: none;
 	outline: none;
 `;
+
+export const ButtonContainer = styled.div``;
 
 export const Button = styled.button`
 	padding: 4px 8px;
