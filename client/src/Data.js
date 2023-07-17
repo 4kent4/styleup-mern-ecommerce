@@ -27,19 +27,19 @@ export const categories = [
 		id: 1,
 		image:
 			"https://images.unsplash.com/photo-1686174099917-325c70c29206?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-		title: "Jumbo Hotdog",
+		title: "Men",
 	},
 	{
 		id: 2,
 		image:
 			"https://images.unsplash.com/photo-1684815798974-98d67873b06b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-		title: "Small Hotdog",
+		title: "Women",
 	},
 	{
 		id: 3,
 		image:
 			"https://images.unsplash.com/photo-1675667804657-be9a9d0a6860?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-		title: "Footlong",
+		title: "Formal",
 	},
 ];
 
