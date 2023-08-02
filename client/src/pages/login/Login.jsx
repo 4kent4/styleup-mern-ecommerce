@@ -10,9 +10,23 @@ import {
 	ButtonContainer,
 	Button,
 	Signup,
+	Error,
 } from "./LoginStyles";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import login from "../../app/feature/user/apiCalls";
 
 const Login = () => {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
+
+	const { isFetching, error } = useSelector((state) => state.user);
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		login(dispatch, { username, password });
+	};
 	return (
 		<Container>
 			<Wrapper>
@@ -20,15 +34,27 @@ const Login = () => {
 				<Form>
 					<InputContainer>
 						<Label>Username:</Label>
-						<Input placeholder="username" />
+						<Input
+							placeholder="username"
+							type="text"
+							onChange={(e) => setUsername(e.target.value)}
+						/>
 					</InputContainer>
 
 					<InputContainer>
 						<Label>Password:</Label>
-						<Input placeholder="password" />
+						<Input
+							placeholder="password"
+							type="password"
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 					</InputContainer>
 					<ButtonContainer>
-						<Button>Login</Button>
+						<Button onClick={handleClick} disabled={isFetching}>
+							Login
+						</Button>
+						<br />
+						{error && <Error>Invalid user</Error>}
 					</ButtonContainer>
 				</Form>
 				<Signup>

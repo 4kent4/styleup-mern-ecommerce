@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/home/Home";
 import ProductList from "./pages/productList/ProductList";
@@ -9,16 +9,47 @@ import Cart from "./pages/cart/Cart";
 import Pay from "./pages/Pay/Pay";
 import Success from "./pages/success/Success";
 import Cancel from "./pages/cancel/Cancel";
+import { useSelector } from "react-redux";
+
+const ProtectedRoute = ({
+	element: Component,
+	authenticated,
+	redirectPath,
+}) => {
+	return authenticated ? <Navigate to={redirectPath} replace /> : <Component />;
+};
 
 function App() {
+	const user = useSelector((state) => state.user.currentUser);
+
 	return (
 		<Routes>
 			<Route path="" element={<Layout />}>
 				<Route index element={<Home />} />
-				<Route path="/productList" element={<ProductList />} />
-				<Route path="/product" element={<Product />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/login" element={<Login />} />
+				<Route path="/products/:category" element={<ProductList />} />
+				<Route path="/product/:id" element={<Product />} />
+
+				<Route
+					path="/register"
+					element={
+						<ProtectedRoute
+							element={Register}
+							authenticated={user}
+							redirectPath="/"
+						/>
+					}
+				/>
+				<Route
+					path="/login"
+					element={
+						<ProtectedRoute
+							element={Login}
+							authenticated={user}
+							redirectPath="/"
+						/>
+					}
+				/>
+
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/pay" element={<Pay />} />
 				<Route path="success" element={<Success />} />

@@ -65,9 +65,17 @@ export const Button = styled.button`
 	&:hover {
 		transform: scale(1.01);
 	}
+
+	&:disabled {
+		color: gray;
+	}
 `;
 
 export const Signup = styled.p`
 	text-align: center;
 	margin-top: 50px;
+`;
+
+export const Error = styled.span`
+	color: red;
 `;

@@ -1,4 +1,4 @@
-import { Container, Icon, Image, Info } from "./ProductStyles";
+import { Container, ProductLink, Icon, Image, Info } from "./ProductStyles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -6,13 +6,15 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 const Product = ({ item }) => {
 	return (
 		<Container>
-			<Image src={item.image} />
+			<Image src={item.img} />
 			<Info>
 				<Icon>
 					<ShoppingCartOutlinedIcon />
 				</Icon>
 				<Icon>
-					<SearchIcon />
+					<ProductLink to={`/product/${item._id}`}>
+						<SearchIcon />
+					</ProductLink>
 				</Icon>
 				<Icon>
 					<FavoriteBorderIcon />

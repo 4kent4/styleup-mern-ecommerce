@@ -21,52 +21,115 @@ import {
 
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { addProduct } from "../../app/feature/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Product = () => {
+	const location = useLocation();
+	const id = location.pathname.split("/")[2];
+	console.log(id);
+
+	const [product, setProduct] = useState({});
+
+	const [quantity, setQuantity] = useState(1);
+
+	const [color, setColor] = useState("");
+	const [size, setSize] = useState("");
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (product.size && product.size.length > 0) {
+			setSize(product.size[0]);
+		}
+	}, [product.size]);
+
+	useEffect(() => {
+		if (product.color && product.color.length > 0) {
+			setColor(product.color[0]);
+		}
+	}, [product.color]);
+
+	const sizeHandler = (e) => {
+		setSize(e.target.value);
+	};
+
+	const quantityHandler = (type) => {
+		if (type === "inc") {
+			setQuantity(quantity + 1);
+		} else if (type === "dec" && quantity === 1) {
+			setQuantity(1);
+		} else {
+			setQuantity(quantity - 1);
+		}
+	};
+
+	useEffect(() => {
+		const getProduct = async () => {
+			try {
+				const res = await axios.get(
+					"http://localhost:3001/api/products/find/" + id
+				);
+				setProduct(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getProduct();
+	}, []);
+
+	const handleClick = () => {
+		dispatch(addProduct({ ...product, quantity, color, size }));
+	};
+
 	return (
 		<Container>
 			<Wrapper>
 				<ImageContainer>
-					<Image
-						src={
-							"https://static-01.daraz.pk/p/1245658d60c0ace4e2dde8441b53284f.jpg"
-						}
-					/>
+					<Image src={product.img} />
 				</ImageContainer>
 				<InfoContainer>
-					<Title>Product Title</Title>
-					<Description>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-						amet nihil iste officiis minus at sint esse incidunt. Quibusdam vero
-						quo doloremque quaerat incidunt tenetur neque expedita odio natus
-						sed!
-					</Description>
-					<Price>$ 30</Price>
+					<Title>{product.title}</Title>
+					<Description>{product.desc}</Description>
+					<Price>$ {product.price}</Price>
 					<FilterContainer>
 						<Filter>
 							<FilterTitle>Color</FilterTitle>
-							<FilterColor color="black" />
-							<FilterColor color="darkblue " />
-							<FilterColor color="gray" />
+							{product.color?.map((col, index) => (
+								<FilterColor
+									color={col}
+									key={index}
+									onClick={() => setColor(col)}
+								/>
+							))}
 						</Filter>
 						<Filter>
 							<FilterTitle>Size</FilterTitle>
-							<FilterSize>
-								<FilterSizeOption>XS</FilterSizeOption>
-								<FilterSizeOption>S</FilterSizeOption>
-								<FilterSizeOption>M</FilterSizeOption>
-								<FilterSizeOption>L</FilterSizeOption>
-								<FilterSizeOption>XL</FilterSizeOption>
+							<FilterSize value={size} onChange={sizeHandler}>
+								{product.size?.map((s, index) => (
+									<FilterSizeOption key={index} value={s}>
+										{s}
+									</FilterSizeOption>
+								))}
 							</FilterSize>
 						</Filter>
 					</FilterContainer>
 					<AddContainer>
 						<AmountContainer>
-							<RemoveIcon style={{ cursor: "pointer" }} />
-							<Amount>1</Amount>
-							<AddIcon style={{ cursor: "pointer" }} />
+							<RemoveIcon
+								onClick={() => quantityHandler("dec")}
+								style={{ cursor: "pointer" }}
+							/>
+							<Amount>{quantity}</Amount>
+							<AddIcon
+								onClick={() => quantityHandler("inc")}
+								style={{ cursor: "pointer" }}
+							/>
 						</AmountContainer>
-						<Button>ADD TO CART</Button>
+						<Button onClick={handleClick}>ADD TO CART</Button>
 					</AddContainer>
 				</InfoContainer>
 			</Wrapper>

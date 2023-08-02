@@ -26,12 +26,14 @@ export const Image = styled.img`
 export const InfoContainer = styled.div`
 	flex: 1;
 	padding: 0 50px;
+	background-color: blanchedalmond;
 
 	${tablet({ padding: "0px" })}
 `;
 
 export const Title = styled.h2`
 	font-weight: 300;
+	margin: 30px 0;
 `;
 
 export const Description = styled.p`
@@ -110,17 +112,18 @@ export const Amount = styled.span`
 `;
 
 export const Button = styled.button`
-	padding: 15px;
-	font-weight: 400;
-	font-size: 14px;
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: black;
+	color: white;
 	border: none;
-	cursor: pointer;
 	border-radius: 5px;
-	background: teal;
-	transition: all 0.2s ease;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 
 	&:hover {
 		transform: scale(1.01);
-		color: white;
+		color: black;
+		background-color: #1976d2;
 	}
 `;

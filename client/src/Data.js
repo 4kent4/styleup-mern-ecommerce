@@ -28,18 +28,21 @@ export const categories = [
 		image:
 			"https://images.unsplash.com/photo-1686174099917-325c70c29206?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
 		title: "Men",
+		cat: "Men",
 	},
 	{
 		id: 2,
 		image:
 			"https://images.unsplash.com/photo-1684815798974-98d67873b06b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
 		title: "Women",
+		cat: "Women",
 	},
 	{
 		id: 3,
 		image:
-			"https://images.unsplash.com/photo-1675667804657-be9a9d0a6860?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-		title: "Formal",
+			"https://images.unsplash.com/photo-1578897367107-2828e351c8a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
+		title: "Kids",
+		cat: "Kids",
 	},
 ];
 

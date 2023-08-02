@@ -31,8 +31,37 @@ import {
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import StripeCheckout from "react-stripe-checkout";
+
+const KEY = import.meta.env.VITE_STRIPE;
 
 const Cart = () => {
+	const cart = useSelector((state) => state.cart);
+	const [stripeToken, setStripeToken] = useState(null);
+
+	const onToken = (token) => {
+		setStripeToken(token.id);
+	};
+
+	useEffect(() => {
+		const makeRequest = async () => {
+			try {
+				const res = await axios.post("http://localhost:3001/payment", {
+					tokenId: stripeToken.id,
+					amount: 2000,
+				});
+				console.log(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		stripeToken && makeRequest();
+	}, [stripeToken, cart.total]);
+
 	return (
 		<Container>
 			<Wrapper>
@@ -47,38 +76,42 @@ const Cart = () => {
 				</TopContainer>
 				<BottomContainer>
 					<Info>
-						<Product>
-							<ProductDetail>
-								<Image src="https://cdn11.bigcommerce.com/s-1b7de/images/stencil/1280x1280/products/3289/9769/MAXIE_14937JWSS_IND-01__67498.1619490228.jpg?c=2" />
-								<Details>
-									<ProductName>
-										<b>Proudct:</b> Denim Longsleeves
-									</ProductName>
-									<ProductId>
-										<b>ID:</b> 0909211251
-									</ProductId>
-									<ProductColor color="Blue" />
-									<ProductSize>
-										<b>Size:</b> M
-									</ProductSize>
-								</Details>
-							</ProductDetail>
-							<PriceDetail>
-								<AmountContainer>
-									<RemoveIcon style={{ cursor: "pointer" }} />
-									<Amount>2</Amount>
-									<AddIcon style={{ cursor: "pointer" }} />
-								</AmountContainer>
-								<ProductPrice>$ 300</ProductPrice>
-							</PriceDetail>
-						</Product>
+						{cart.products.map((product) => (
+							<Product key={product.id}>
+								<ProductDetail>
+									<Image src={product.img} />
+									<Details>
+										<ProductName>
+											<b>Proudct:</b> {product.title}
+										</ProductName>
+										<ProductId>
+											<b>ID:</b> {product.id}
+										</ProductId>
+										<ProductColor color={product.color} />
+										<ProductSize>
+											<b>Size:</b> {product.size}
+										</ProductSize>
+									</Details>
+								</ProductDetail>
+								<PriceDetail>
+									<AmountContainer>
+										<RemoveIcon style={{ cursor: "pointer" }} />
+										<Amount>{product.quantity}</Amount>
+										<AddIcon style={{ cursor: "pointer" }} />
+									</AmountContainer>
+									<ProductPrice>
+										$ {product.price * product.quantity}
+									</ProductPrice>
+								</PriceDetail>
+							</Product>
+						))}
 						<Hr />
 					</Info>
 					<Summary>
 						<SummaryTitle>Order Summary</SummaryTitle>
 						<SummaryItem>
 							<SummaryItemText>Subtotal</SummaryItemText>
-							<SummaryItemPrice>$ 80</SummaryItemPrice>
+							<SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
 						</SummaryItem>
 						<Hr />
 						<SummaryItem>
@@ -93,10 +126,20 @@ const Cart = () => {
 						<Hr />
 						<SummaryItem type="total">
 							<SummaryItemText>total</SummaryItemText>
-							<SummaryItemPrice>$ 80</SummaryItemPrice>
+							<SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
 						</SummaryItem>
 						<Hr />
-						<SummaryButton>Checkout now</SummaryButton>
+						<StripeCheckout
+							name="Style Up"
+							billingAddress
+							shippingAddress
+							description={`Your total is $${cart.total}`}
+							amount={cart.total * 100}
+							token={onToken}
+							stripeKey={KEY}
+						>
+							<SummaryButton>CHECKOUT NOW</SummaryButton>
+						</StripeCheckout>
 					</Summary>
 				</BottomContainer>
 			</Wrapper>

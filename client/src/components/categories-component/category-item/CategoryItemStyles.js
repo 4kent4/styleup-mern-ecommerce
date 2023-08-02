@@ -15,7 +15,7 @@ export const Image = styled.img`
 `;
 
 export const Title = styled.h1`
-	background-color: rgba(250, 250, 250, 0.5);
+	background-color: rgba(250, 250, 250, 1);
 	font-weight: 300;
 	color: rgb(30, 30, 30);
 	padding: 4px 8px;
@@ -24,10 +24,10 @@ export const Title = styled.h1`
 	transition: all 0.3s ease;
 	border-radius: 5px;
 
-	&:hover {
+	/* &:hover {
 		background-color: rgba(250, 250, 250, 1);
 		color: rgb(0, 0, 0);
-	}
+	} */
 `;
 
 export const Button = styled.button`
@@ -38,11 +38,11 @@ export const Button = styled.button`
 	cursor: pointer;
 	border-radius: 5px;
 	background: rgba(250, 250, 250, 1);
-	transition: all 0.5s ease;
+	transition: all 0.3s ease;
 	opacity: 0;
 
 	&:hover {
-		transform: scale(1.1);
+		transform: scale(1.03);
 	}
 `;
 

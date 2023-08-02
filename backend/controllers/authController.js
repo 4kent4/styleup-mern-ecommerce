@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 //Register Controller
 const authRegisterController = async (req, res) => {
-	const { username, email, password } = req.body;
+	const { firstName, lastName, username, email, password } = req.body;
 
 	try {
 		//Check if the email is already exist :)
@@ -18,6 +18,8 @@ const authRegisterController = async (req, res) => {
 
 		//Create a new user with a hashed Password
 		const newUser = await User.create({
+			firstName,
+			lastName,
 			username,
 			email,
 			password: hashedPassword,
@@ -31,10 +33,10 @@ const authRegisterController = async (req, res) => {
 
 //Login Controller
 const authLoginController = async (req, res) => {
-	const { email, password } = req.body;
+	const { username, password } = req.body;
 	try {
-		//find email in the database
-		const user = await User.findOne({ email });
+		//find username in the database
+		const user = await User.findOne({ username });
 		if (!user) {
 			return res.status(404).json({ message: "User not found" });
 		}
